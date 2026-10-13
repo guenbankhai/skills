@@ -53,34 +53,60 @@ Start from what you need. Not sure which skill fits? Ask `/ask-skills`. A common
 
 Like the upstream skills, everything is configured in `AGENTS.md` files. There are two levels:
 
-- **Global**: [`AGENTS.md`](AGENTS.md) in this repo holds the shared rules (intent, clarification, decisions and scope, research, verification, execution boundaries). The skills assume it is loaded and do not repeat it. Add your own rules under its **Custom rules** section, for example "Reply in Vietnamese."
+- **Toolkit**: [`AGENTS.md`](AGENTS.md) in this repo holds the shared rules (intent, clarification, decisions and scope, research, verification, execution boundaries). Copy them into each project's `AGENTS.md` (see Installation); the skills assume they are loaded and do not repeat them. Add your own rules there too, for example "Reply in Vietnamese."
 - **Per project**: each project configures itself in its own `AGENTS.md` / `CLAUDE.md`: overview, commands, constraints, and pointers to deeper docs. The toolkit imposes no technology or structure. If the project keeps a domain glossary or ADRs, the skills read them from `GLOSSARY.md` and `docs/adr/`, or wherever the project's `AGENTS.md` says.
 
 **Precedence**: your explicit instructions in the session, then the project's rules, then the global rules. Project rules may add constraints or explicitly grant permissions; they never silently override a decision you made.
 
 Execution boundaries by default: Git is read-only, nothing goes to remote hosting (no push, pull requests, or issues on GitHub, GitLab, or similar), no dependency installs, no documentation writes, no follow-on tasks. Subagents are used where a skill calls for them or where they save context and time (broad reading, parallel review); small tasks stay inline.
 
-## Installation (planned)
+## Installation
 
-Not installed yet. The intended setup, once the repository is published:
+Skills are installed per project: copy them into the project's skill folders, where Claude Code and Codex look for them. Nothing global is changed.
 
-**Claude Code**
+| Agent | Skill folder in the project | Call a skill with |
+|---|---|---|
+| Claude Code | `.claude/skills/` | `/name` |
+| Codex | `.agents/skills/` | `$name` (or pick it from `/skills`) |
 
-1. Copy or symlink each folder in `skills/` into `~/.claude/skills/`.
-2. Load the global rules by adding this line to `~/.claude/CLAUDE.md`:
+**1. Clone this repo once**, anywhere outside your project:
 
-   ```
-   @/absolute/path/to/this/repo/AGENTS.md
-   ```
+```bash
+git clone https://github.com/guenbankhai/skills ~/myfolder
+```
 
-**Codex**
+**2. Copy the skills into your project.** Run from the project root.
 
-1. Copy or symlink each folder in `skills/` into `~/.agents/skills/` (Codex's user-level skills directory; it follows symlinks).
-2. Copy or symlink this repo's `AGENTS.md` to `~/.codex/AGENTS.md`.
+macOS / Linux:
 
-In Codex, call a skill explicitly with `$name` (for example `$review-my-code`) instead of `/name`. User-invoked skills are reachable only that way.
+```bash
+mkdir -p .claude/skills .agents/skills
+cp -R ~/myfolder/skills/* .claude/skills/
+cp -R ~/myfolder/skills/* .agents/skills/
+```
 
-On Windows, symlinks need Developer Mode or an elevated shell; copying works everywhere but must be repeated after updates.
+Windows (PowerShell):
+
+```powershell
+New-Item -ItemType Directory -Force .claude\skills, .agents\skills | Out-Null
+Copy-Item ~\myfolder\skills\* .claude\skills -Recurse -Force
+Copy-Item ~\myfolder\skills\* .agents\skills -Recurse -Force
+```
+
+Using only one agent? Copy into that agent's folder only.
+
+**3. Add the shared rules.** The skills assume the rules in this repo's [`AGENTS.md`](AGENTS.md) are loaded.
+
+- **Codex** reads the project's `AGENTS.md`. If the project has none, copy this repo's `AGENTS.md` into the project root. If it has one, paste this repo's rules into it.
+- **Claude Code** reads `AGENTS.md` by itself only when the project has no `CLAUDE.md`. If the project has a `CLAUDE.md`, add this line to it:
+
+  ```
+  @AGENTS.md
+  ```
+
+**4. Start (or restart) the agent in the project** and type `/` in Claude Code or `$` in Codex to see the skills.
+
+**Updating**: `git pull` in `~/myfolder`, then repeat step 2. Same-name skill folders are overwritten; your other skills are not touched. If the rules changed, update the copy in your `AGENTS.md` too.
 
 `/review-my-code` is named to avoid the built-in review commands of Claude Code (`/code-review`, `/review`) and Codex (`/review`). If a harness built-in shadows another skill here, rename that skill's folder and `name:` in your copy, or ship the set as a namespaced plugin when publishing.
 
