@@ -15,7 +15,7 @@ Knowing a prototype would help is not permission to build one:
 - **The user asked you to experiment with or validate an idea**: a prototype is one way to do it. Use it when it is the cheapest way to settle the question.
 - **The user asked for an explanation, research, analysis, or discussion**: write no prototype files. If a prototype would settle something that talking won't, suggest it in one line and wait for a yes.
 
-It is never a required step before implementing: if the design is already settled, skip it. If something already built is misbehaving, that is `/debug`; a prototype explores what to build, not why the built thing is broken.
+It is never a required step before implementing: if the design is already settled, skip it. If something already built is misbehaving, that is `/diagnosing-bugs`; a prototype explores what to build, not why the built thing is broken.
 
 Keep it to one question, or a few closely related ones. If it can't be answered in one sitting, the question is too big; split it.
 

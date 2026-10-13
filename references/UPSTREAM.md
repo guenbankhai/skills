@@ -19,7 +19,7 @@ Techniques (not files) were also taken from https://github.com/obra/superpowers 
 | `domain-modeling` | `skills/engineering/domain-modeling` | model |
 | `wait-what` | `skills/productivity/wait-what` | user |
 | `codebase-design` | `skills/engineering/codebase-design` | model |
-| `debug` | `skills/engineering/diagnosing-bugs` | model |
+| `diagnosing-bugs` | `skills/engineering/diagnosing-bugs` | model |
 | `tdd` | `skills/engineering/tdd` | model |
 | `research` | `skills/engineering/research` | model |
 | `prototype` | `skills/engineering/prototype` | model |
@@ -51,7 +51,7 @@ Per skill:
 - **domain-modeling**: proposes glossary entries and ADRs inline and writes them only when the user agrees; honours project-defined doc locations.
 - **wait-what**: glossary optional; explicitly explains without continuing the task.
 - **codebase-design**: added a review mode (scoping, friction signals, deletion test, candidates in chat, then stop). Review mode walks the codebase with a sub-agent; design-it-twice keeps its parallel sub-agents.
-- **debug**: renamed from `diagnosing-bugs`; six phases and feedback-loop discipline kept. Added: diagnose-only requests stop after Phase 4; read errors and recent changes first; trace bad values backward to their source; stop after three failed fixes. `git bisect` handed to the user; the confirmed hypothesis goes in the report instead of a commit message.
+- **diagnosing-bugs**: upstream name kept (it was briefly renamed `debug`, which was confusing); six phases and feedback-loop discipline kept. Added: diagnose-only requests stop after Phase 4; read errors and recent changes first; trace bad values backward to their source; stop after three failed fixes. `git bisect` handed to the user; the confirmed hypothesis goes in the report instead of a commit message.
 - **tdd**: refactor-on-green restored inside the change's scope (upstream had moved it out of the loop); seams are confirmed only when not already obvious or agreed; trivial, non-behavioural changes skip the loop.
 - **research**: rewritten around two modes (focused, open-ended). Broad reading goes to a background agent as upstream, focused questions are read directly; answers in chat with citations; files only on request. Primary-source discipline kept.
 - **implement**: works from the conversation or a named file instead of tickets; no tracker fetch, auto-review, or commit; reports verification results.
@@ -61,6 +61,6 @@ Per skill:
 
 ## Unresolved
 
-- **Name collisions**: `code-review` was renamed to `review-my-code` to avoid the built-in review commands. `debug` may collide in some harness versions. If a skill is shadowed, rename it in your copy or install the set as a namespaced plugin.
+- **Name collisions**: `code-review` was renamed to `review-my-code` to avoid the built-in review commands. If a skill is shadowed, rename it in your copy or install the set as a namespaced plugin.
 - **Codex rules import**: Codex reads skills from `~/.agents/skills` (confirmed in the Codex docs, symlinks supported) but has no confirmed import syntax for `AGENTS.md`, so the global `AGENTS.md` is copied or symlinked to `~/.codex/AGENTS.md`.
 - **Not exercised in a live harness**: skills were validated statically (metadata, references, structure), not yet run against Claude Code or Codex.

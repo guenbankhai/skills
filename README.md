@@ -33,7 +33,7 @@ It is not an agent framework. There is no mandatory workflow: each skill is a to
 | `/grilling` | The interview primitive: rounds of questions over a decision tree, with recommended answers. |
 | `/domain-modeling` | Sharpen the project's domain language; proposes `GLOSSARY.md` entries and ADRs, writes them when you agree. |
 | `/codebase-design` | Deep-module vocabulary, an architecture review mode, and design-it-twice for interfaces. Recommends; refactors only on request. |
-| `/debug` | Feedback-loop-first diagnosis of hard bugs and regressions; root cause before any fix. |
+| `/diagnosing-bugs` | Feedback-loop-first diagnosis of hard bugs and regressions; root cause before any fix. |
 | `/tdd` | Red → green → refactor at agreed seams, when tests fit the change. |
 | `/research` | Open-ended or source-focused research against primary sources, answered in chat with citations. |
 | `/prototype` | Throwaway code that answers one design question: a clickable logic demo or radically different UI variants. |
@@ -47,7 +47,7 @@ Start from what you need. Not sure which skill fits? Ask `/ask-skills`. A common
 2. `/implement` (driving `/tdd` where it fits).
 3. `/review-my-code`, when you want a review.
 
-`/debug`, `/research`, `/prototype`, `/codebase-design`, and `/wait-what` stand alone. `/handoff` is for moving work to another harness, directory, or person.
+`/diagnosing-bugs`, `/research`, `/prototype`, `/codebase-design`, and `/wait-what` stand alone. `/handoff` is for moving work to another harness, directory, or person.
 
 ## Customising
 

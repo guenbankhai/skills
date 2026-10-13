@@ -1,9 +1,9 @@
 ---
-name: debug
+name: diagnosing-bugs
 description: Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow whose cause isn't already proven.
 ---
 
-# Debug
+# Diagnosing Bugs
 
 A discipline for hard bugs: root cause first, fix second. Skip phases only when explicitly justified. When the error itself already proves the cause (a stack trace pointing at a typo), state that evidence and fix it; this skill is for everything else.
 
