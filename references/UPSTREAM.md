@@ -22,13 +22,14 @@ Techniques (not files) were also taken from https://github.com/obra/superpowers 
 | `debug` | `skills/engineering/diagnosing-bugs` | model |
 | `tdd` | `skills/engineering/tdd` | model |
 | `research` | `skills/engineering/research` | model |
+| `prototype` | `skills/engineering/prototype` | model |
 | `implement` | `skills/engineering/implement` | user |
 | `review-my-code` | `skills/engineering/code-review` | model |
 | `handoff` | `skills/productivity/handoff` | user |
 
-`domain-modeling` is not one of the 13 originally requested skills. It was added because `grill-with-docs` is only a call to `grilling` plus `domain-modeling`; without it, grill-with-docs would lose its meaning. `prototype` was requested, then dropped as not needed.
+`domain-modeling` is not one of the 13 originally requested skills. It was added because `grill-with-docs` is only a call to `grilling` plus `domain-modeling`; without it, grill-with-docs would lose its meaning. `prototype` was first dropped, then restored at the user's request as a general-purpose, technology-agnostic skill.
 
-All supporting files of these skills were kept: `PHASE-BOUNDARIES.md`, `ADR-FORMAT.md`, `GLOSSARY-FORMAT.md`, `DEEPENING.md`, `DESIGN-IT-TWICE.md`, `scripts/hitl-loop.template.sh`, `tests.md`, `mocking.md`, and every `agents/openai.yaml`.
+All supporting files of these skills were kept: `PHASE-BOUNDARIES.md`, `ADR-FORMAT.md`, `GLOSSARY-FORMAT.md`, `DEEPENING.md`, `DESIGN-IT-TWICE.md`, `LOGIC.md`, `UI.md`, `scripts/hitl-loop.template.sh`, `tests.md`, `mocking.md`, and every `agents/openai.yaml`.
 
 ## Not imported
 
@@ -36,7 +37,6 @@ All supporting files of these skills were kept: `PHASE-BOUNDARIES.md`, `ADR-FORM
 - **`to-spec`, `to-tickets`, `implement-spec`, `triage`, `wayfinder`**: tracker- and spec-driven flows.
 - **`improve-codebase-architecture`**: its exploration step became the review mode of `codebase-design`; its HTML report was dropped; its exploration sub-agent was kept.
 - **`retro`, `pr`, `wizard`, `teach`, `to-questionnaire`, `writing-for-agents`**: not needed by the selected skills.
-- **`prototype`**: dropped by decision; throwaway experiments are not part of this toolkit's workflow.
 - Upstream repository tooling: `docs/`, `.changeset/`, `.claude-plugin/`, `scripts/`, bucket READMEs. Like upstream, this repo has no separate rules folder or test suite: shared rules live in `AGENTS.md`.
 
 ## Customisations
@@ -56,6 +56,7 @@ Per skill:
 - **research**: rewritten around two modes (focused, open-ended). Broad reading goes to a background agent as upstream, focused questions are read directly; answers in chat with citations; files only on request. Primary-source discipline kept.
 - **implement**: works from the conversation or a named file instead of tickets; no tracker fetch, auto-review, or commit; reports verification results.
 - **review-my-code**: renamed from `code-review` to avoid the built-in review commands of Claude Code (`/code-review`, `/review`) and Codex (`/review`). Three axes (Correctness added to Standards and Spec, which is renamed Scope), each axis a parallel sub-agent as upstream, inline for small diffs. Takes a fixed point, a commit, uncommitted work, or files; no tracker or setup dependency; reports without fixing. Smell baseline kept verbatim.
+- **prototype**: both branches, the shareable logic demo, the radically-different-variants rule, and every anti-pattern kept. Added: when to build one (an explicit request builds; authorised experimentation may use one; explanation, research, or discussion only suggests one and waits; never a required step before implementing); plain HTML/CSS/JS is the default environment, a specific runtime only when the question depends on it, and the report says whether the result is a simulation or verified in the target environment; no new dependencies. UI branch gained sub-shape C, a standalone HTML file, for questions that don't depend on the app around them. The capture step (commit to a `prototype/<name>` branch, pointer on the implementation issue, fold into main) became: report the answer in chat, leave the prototype in place, and fold in, branch, or delete only on request.
 - **handoff**: output in chat by default, file on request; fixed sections (objective, decisions, completed, remaining, files, next action, suggested skills).
 
 ## Unresolved

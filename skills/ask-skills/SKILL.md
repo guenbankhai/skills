@@ -21,6 +21,7 @@ There is no mandatory flow. Every step below is optional: take the one the situa
 ## On-ramps
 
 - **Something's broken** → **`/debug`**. For the hard ones: the bug that resists a first glance, the intermittent flake, the regression between two known-good states. It refuses to theorise until it has a **tight feedback loop** (one command that already goes red on *this* bug), then fixes with a regression test when you asked for a fix. Where the finding is that there's no good seam to lock the bug down, take that to **`/codebase-design`**.
+- **A question talking won't settle** → **`/prototype`**. Throwaway code that answers one design question: a single HTML file that lets anyone click through a state model, or several radically different UI variants behind a switcher. Use it when a grilling session keeps circling a "how should this behave / look" question; the one-line answer goes back into the thinking. Never a required step: if the design is settled, go straight to `/implement`.
 - **You need knowledge first** → **`/research`**. Open-ended discovery or a focused read of sources you name, against primary sources, answered in the conversation with citations. Research feeds the thinking; take what it finds into step 1 or straight into a decision.
 
 ## Codebase design

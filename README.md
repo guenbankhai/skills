@@ -36,6 +36,7 @@ It is not an agent framework. There is no mandatory workflow: each skill is a to
 | `/debug` | Feedback-loop-first diagnosis of hard bugs and regressions; root cause before any fix. |
 | `/tdd` | Red → green → refactor at agreed seams, when tests fit the change. |
 | `/research` | Open-ended or source-focused research against primary sources, answered in chat with citations. |
+| `/prototype` | Throwaway code that answers one design question: a clickable logic demo or radically different UI variants. |
 | `/review-my-code` | Correctness, scope, and standards review of a diff, reported per axis. Fixes nothing unless asked. |
 
 ## How to use them
@@ -46,7 +47,7 @@ Start from what you need. Not sure which skill fits? Ask `/ask-skills`. A common
 2. `/implement` (driving `/tdd` where it fits).
 3. `/review-my-code`, when you want a review.
 
-`/debug`, `/research`, `/codebase-design`, and `/wait-what` stand alone. `/handoff` is for moving work to another harness, directory, or person.
+`/debug`, `/research`, `/prototype`, `/codebase-design`, and `/wait-what` stand alone. `/handoff` is for moving work to another harness, directory, or person.
 
 ## Customising
 
