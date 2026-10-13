@@ -60,56 +60,6 @@ Like the upstream skills, everything is configured in `AGENTS.md` files. There a
 
 Execution boundaries by default: Git is read-only, nothing goes to remote hosting (no push, pull requests, or issues on GitHub, GitLab, or similar), no dependency installs, no documentation writes, no follow-on tasks. Subagents are used where a skill calls for them or where they save context and time (broad reading, parallel review); small tasks stay inline.
 
-## Installation
-
-Skills are installed per project: copy them into the project's skill folders, where Claude Code and Codex look for them. Nothing global is changed.
-
-| Agent | Skill folder in the project | Call a skill with |
-|---|---|---|
-| Claude Code | `.claude/skills/` | `/name` |
-| Codex | `.agents/skills/` | `$name` (or pick it from `/skills`) |
-
-**1. Clone this repo once**, anywhere outside your project:
-
-```bash
-git clone https://github.com/guenbankhai/skills ~/myfolder
-```
-
-**2. Copy the skills into your project.** Run from the project root.
-
-macOS / Linux:
-
-```bash
-mkdir -p .claude/skills .agents/skills
-cp -R ~/myfolder/skills/* .claude/skills/
-cp -R ~/myfolder/skills/* .agents/skills/
-```
-
-Windows (PowerShell):
-
-```powershell
-New-Item -ItemType Directory -Force .claude\skills, .agents\skills | Out-Null
-Copy-Item ~\myfolder\skills\* .claude\skills -Recurse -Force
-Copy-Item ~\myfolder\skills\* .agents\skills -Recurse -Force
-```
-
-Using only one agent? Copy into that agent's folder only.
-
-**3. Add the shared rules.** The skills assume the rules in this repo's [`AGENTS.md`](AGENTS.md) are loaded.
-
-- **Codex** reads the project's `AGENTS.md`. If the project has none, copy this repo's `AGENTS.md` into the project root. If it has one, paste this repo's rules into it.
-- **Claude Code** reads `AGENTS.md` by itself only when the project has no `CLAUDE.md`. If the project has a `CLAUDE.md`, add this line to it:
-
-  ```
-  @AGENTS.md
-  ```
-
-**4. Start (or restart) the agent in the project** and type `/` in Claude Code or `$` in Codex to see the skills.
-
-**Updating**: `git pull` in `~/myfolder`, then repeat step 2. Same-name skill folders are overwritten; your other skills are not touched. If the rules changed, update the copy in your `AGENTS.md` too.
-
-`/review-my-code` is named to avoid the built-in review commands of Claude Code (`/code-review`, `/review`) and Codex (`/review`). If a harness built-in shadows another skill here, rename that skill's folder and `name:` in your copy, or ship the set as a namespaced plugin when publishing.
-
 ## Maintaining this repository
 
 - Each skill lives in `skills/<name>/`: a `SKILL.md` whose `name:` matches the folder, supporting files beside it, and `agents/openai.yaml` for Codex UI metadata.
